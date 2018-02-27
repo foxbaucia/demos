@@ -3,6 +3,7 @@ package co.softwarebox.demos.domain;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +23,9 @@ public class DomainController {
 		
 	}
 
-	@RequestMapping(method=RequestMethod.GET, value="/v1/domains/")
+	// TODO CrossOrigin is valid for local test. Consider to open it for all the web.
+	@CrossOrigin(origins = "http://localhost:8080")
+	@RequestMapping(method=RequestMethod.GET, value="/api/v1/domains/")
 	public List<DomainStatistics> getDomains (@RequestParam(defaultValue = "3", name = "size", required = false) Integer size) throws Exception {
 		
 		

@@ -6,10 +6,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(
+	    indexes = {
+    	       @Index(name = "VISIT_INDX_0", columnList = "domain"),
+	    }
+)
 public class Visit {
 
 	@Id

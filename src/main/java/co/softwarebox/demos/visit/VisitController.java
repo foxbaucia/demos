@@ -21,7 +21,7 @@ public class VisitController {
 		
 	}
 
-	@RequestMapping(method=RequestMethod.POST, value="/v1/visits/")
+	@RequestMapping(method=RequestMethod.POST, value="/api/v1/visits/")
 	public void addVisit (@RequestBody Visit visit) throws Exception {
 		
 		if (visit == null) {
