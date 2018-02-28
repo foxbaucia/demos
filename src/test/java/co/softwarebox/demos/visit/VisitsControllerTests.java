@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import co.softwarebox.demos.DemoApiApp;
+
 /**
  * Basic integration tests for demo application.
  *
@@ -36,7 +38,7 @@ public class VisitsControllerTests {
 		String url = "http://www.server.com";
 		originalVisit.setUrl(url);
 
-		ResponseEntity<Visit> postResponse = this.restTemplate.postForEntity(API_V1_VISITS_ENDPOINT, originalVisit, Visit.class);
+		ResponseEntity<Visit> postResponse = getRestTemplate().postForEntity(API_V1_VISITS_ENDPOINT, originalVisit, Visit.class);
 		assertThat(postResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertNotNull(postResponse.getBody());
 		assertNotNull(postResponse.getBody().getId());
@@ -44,7 +46,7 @@ public class VisitsControllerTests {
 		assertEquals("server.com", postResponse.getBody().getDomain());
 		
 		// TEST THE GET
-		ResponseEntity<Visit> getResponse = this.restTemplate.getForEntity(API_V1_VISITS_ENDPOINT + postResponse.getBody().getId(), Visit.class);
+		ResponseEntity<Visit> getResponse = getRestTemplate().getForEntity(API_V1_VISITS_ENDPOINT + postResponse.getBody().getId(), Visit.class);
 		assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
 		Visit visit = getResponse.getBody();
 		assertNotNull(visit);
@@ -56,14 +58,14 @@ public class VisitsControllerTests {
 		// TEST EDITION
 		String ip = "192.168.0.1";
 		visit.setIp(ip);
-		this.restTemplate.put(API_V1_VISITS_ENDPOINT + visit.getId(), visit);
-		ResponseEntity<Visit> getResponseAfterEdition = this.restTemplate.getForEntity(API_V1_VISITS_ENDPOINT + visit.getId(), Visit.class);
+		getRestTemplate().put(API_V1_VISITS_ENDPOINT + visit.getId(), visit);
+		ResponseEntity<Visit> getResponseAfterEdition = getRestTemplate().getForEntity(API_V1_VISITS_ENDPOINT + visit.getId(), Visit.class);
 		assertThat(getResponseAfterEdition.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertEquals(ip, getResponseAfterEdition.getBody().getIp());
 
 
-		this.restTemplate.delete(API_V1_VISITS_ENDPOINT + visit.getId());
-		ResponseEntity<Visit> getResponseAfterDelete = this.restTemplate.getForEntity(API_V1_VISITS_ENDPOINT + visit.getId(), Visit.class);
+		getRestTemplate().delete(API_V1_VISITS_ENDPOINT + visit.getId());
+		ResponseEntity<Visit> getResponseAfterDelete = getRestTemplate().getForEntity(API_V1_VISITS_ENDPOINT + visit.getId(), Visit.class);
 		assertThat(getResponseAfterDelete.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
 
 		
@@ -74,9 +76,17 @@ public class VisitsControllerTests {
 		Visit v = new Visit();
 		v.setUrl("server.com");
 
-		ResponseEntity<Visit> entity = this.restTemplate.postForEntity(API_V1_VISITS_ENDPOINT, v, Visit.class);
+		ResponseEntity<Visit> entity = getRestTemplate().postForEntity(API_V1_VISITS_ENDPOINT, v, Visit.class);
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
 
 	}
-	
+
+	/**
+	 * Return the singleton rest template with basic authorization.
+	 * @return TestRestTemplate
+	 */
+	private TestRestTemplate getRestTemplate() {
+		return this.restTemplate.withBasicAuth(DemoApiApp.CLIENT_NAME, DemoApiApp.CLIENT_PASSWORD);
+	}
+
 }

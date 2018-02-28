@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import co.softwarebox.demos.DemoApiApp;
 import co.softwarebox.demos.visit.Visit;
 
 /**
@@ -38,18 +39,18 @@ public class DomainsTests {
 		String url = "http://www.domains-test.com/foo/bar?param=1";
 		v.setUrl(url);
 
-		this.restTemplate.postForEntity("/api/v1/visits/", v, Visit.class);
-		this.restTemplate.postForEntity("/api/v1/visits/", v, Visit.class);
-		this.restTemplate.postForEntity("/api/v1/visits/", v, Visit.class);
-		this.restTemplate.postForEntity("/api/v1/visits/", v, Visit.class);
-		ResponseEntity<Visit> postResponse = this.restTemplate.postForEntity("/api/v1/visits/", v, Visit.class);
+		getRestTemplate().postForEntity("/api/v1/visits/", v, Visit.class);
+		getRestTemplate().postForEntity("/api/v1/visits/", v, Visit.class);
+		getRestTemplate().postForEntity("/api/v1/visits/", v, Visit.class);
+		getRestTemplate().postForEntity("/api/v1/visits/", v, Visit.class);
+		ResponseEntity<Visit> postResponse = getRestTemplate().postForEntity("/api/v1/visits/", v, Visit.class);
 		
 		assertNotNull(postResponse.getBody());
 
 		String domainName = postResponse.getBody().getDomain();
 		assertNotNull(domainName);
 
-		ResponseEntity<DomainStatistics[]> getResponse = this.restTemplate.getForEntity("/api/v1/domains/", DomainStatistics[].class);
+		ResponseEntity<DomainStatistics[]> getResponse = getRestTemplate().getForEntity("/api/v1/domains/", DomainStatistics[].class);
 		assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
 		
 		DomainStatistics[] result = getResponse.getBody();
@@ -68,6 +69,14 @@ public class DomainsTests {
 		assertNotNull(stat.getHits());
 		assertEquals(new Long(5), stat.getHits());
 	
+	}
+
+	/**
+	 * Return the singleton rest template with basic authorization.
+	 * @return TestRestTemplate
+	 */
+	private TestRestTemplate getRestTemplate() {
+		return this.restTemplate.withBasicAuth(DemoApiApp.CLIENT_NAME, DemoApiApp.CLIENT_PASSWORD);
 	}
 
 	
