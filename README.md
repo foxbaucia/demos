@@ -48,17 +48,32 @@ All methods and classes are documented.
 
 ### JUnit
 **DomainsTests.java**: Test the domains controller
+
 **VisitsControllerTests.java**: Test the visits controller
+
 **UtilsTest.java**: Test core functions.
 
-### Multithreading
-Refer to Stress Test project. To see the use of ExecutorService and threads.
+### Multi-threading
+Refer to Stress Test project:
+
+***StressTest*** Use of ExecutorService and threads.
+
+***ExpectedResult*** Use of synchronized method.
 
 ### Exceptions
 ***IllegalArgumentException*** Used when the user inputs an invalid argument.
+
 ***NotFoundException*** Used when the user try to read an entity that doesn't exist. 
 In the API all the exceptions are handled by ExceptionHandler.  
 If you want to see try-catch examples please refer to Stress Test project UrlTest and StressTest classes.
+
+### Use of Collections
+Refer to Stress Test project class ExpectedResult where I used:
+
+***Hashtable*** for quick access updating a table.
+
+***TreeMap*** to have an ordered List by Hits. 
+
 
 ## Front-End in ReactJS
 The Front End of this project is made ReactJS App.
@@ -73,8 +88,8 @@ You can see the use of Components
 I used Bootstrap 3 to make a nice presentation. 
 
 ## Bash Script
-*** scritps/deploy.sh *** : Use this script to update the code with the last code in git, compile it and prepare the package.
-*** scritps/start.sh ***: Use this script to start the server.  
+scritps/deploy.sh: Use this script to update the code with the last code in git, compile it and prepare the package.
+scritps/start.sh: Use this script to start the server.  
 
 ## Security
 I used Basic Authentication to control access to the API.
@@ -94,7 +109,9 @@ For the next release I will continue with:
 ## Configurations
 ### Remove all hard-coded configurations.
 ***Urls***: are all over the code, I need to create good configuration files according each environment Local, Development, QA, Staging, Production
+
 ***User/Password***: Make a configuration file with default user and password for testing.
+
 ***Stress test***: Make the test configurable
 
 ## Data base
