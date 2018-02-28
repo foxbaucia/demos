@@ -25,7 +25,7 @@ import co.softwarebox.demos.visit.Visit;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class GetControllerTests {
+public class DomainsTests {
 
 	@Autowired
 	private TestRestTemplate restTemplate;
