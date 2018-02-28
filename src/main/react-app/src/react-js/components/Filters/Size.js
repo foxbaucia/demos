@@ -15,7 +15,6 @@ export default class Size extends React.Component {
     		<label>Size:</label>
     		<input class="form-control" onChange={this.handleChange.bind(this)} value={this.props.value} />
   	  </div>
-        
     );
   }
 }

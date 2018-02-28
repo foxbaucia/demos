@@ -2,6 +2,7 @@ import React from "react";
 
 import Filters from "./Filters";
 import List from "./List";
+import Credentials from "./Credentials";
 
 export default class Layout extends React.Component {
   constructor() {
@@ -10,7 +11,9 @@ export default class Layout extends React.Component {
       titles : ["Url", "Hits"],
       filters : {
         autorefresh: true,
-        size: 3  
+        size: 3,
+        user: null,
+        password: null
       },
       data: []
     };
@@ -32,10 +35,22 @@ export default class Layout extends React.Component {
     const _state = this.state;
     this.setState(_state);
   }
-
+  
+  handleUpdateCredentials(user, password) {
+	const _state = this.state;
+	_state.filters.user = user;
+	_state.filters.password = password;
+    this.setState(_state);
+  }
+  
   render() {
     return (
       <div>
+        <div class="row">
+          <Credentials 
+            onChange={(user, password) => this.handleUpdateCredentials(user, password)} 
+           />
+        </div>
         <div class="row">
           <Filters 
             onChange={() => this.handleRefreshData()} 
