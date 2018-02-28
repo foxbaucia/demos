@@ -9,6 +9,9 @@ public class DomainStatistics {
 	
 	private Long hits;
 
+	public DomainStatistics() {
+	}
+	
 	public DomainStatistics(String name, Long hits) {
 		
 		this.name = name;

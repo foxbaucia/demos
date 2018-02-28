@@ -17,17 +17,13 @@ public class IndexController {
 	@RequestMapping("/")
     public ModelAndView home(Model model) {
 		model.addAttribute("message", "HowToDoInJava Reader !!");
-        
 		return new ModelAndView("index","WelcomeMessage",model);
-
-		//return "index";
     }
 	
 	@RequestMapping("/next")
     public ModelAndView next(Model model) {
         model.addAttribute("message", "You are in new page !!");
 		return new ModelAndView("next","WelcomeMessage",model);
-
 	}
 
 

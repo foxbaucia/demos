@@ -10,7 +10,13 @@ import javax.persistence.Index;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
+/**
+ * 
+ * Visit entity representation.
+ * 
+ * @author martinfox
+ *
+ */
 @Entity
 @Table(
 	    indexes = {
