@@ -14,6 +14,11 @@ import co.softwarebox.demos.account.AccountRepository;
 @SpringBootApplication
 public class DemoApiApp extends SpringBootServletInitializer {
 
+
+    public static final String CLIENT_NAME = "demos";
+    public static final String CLIENT_PASSWORD = "password";
+
+	
     public static void main(String [] args) {
 		SpringApplication.run(DemoApiApp.class, args);
 
@@ -27,7 +32,7 @@ public class DemoApiApp extends SpringBootServletInitializer {
 
         @Override
         public void run(String... arg0) throws Exception {
-          accountRepository.save(new Account("demos", "password"));
+          accountRepository.save(new Account(CLIENT_NAME, CLIENT_PASSWORD));
         }
         
       };
