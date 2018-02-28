@@ -21,7 +21,7 @@
   "devDependencies": {},
   "scripts": {
     "dev": "./node_modules/.bin/webpack-dev-server --content-base src --inline --hot",
-    "compile": "./node_modules/.bin/webpack && cp ./src/index.html ../webapp/WEB-INF/template/ && cp -r ./src/js ../webapp/WEB-INF/js && cp -r ./src/vendor ../webapp/WEB-INF/vendor",
+    "compile": "./node_modules/.bin/webpack && cp ./src/index.html ../webapp/WEB-INF/template/ && cp -r ./src/js ../resources/static/js  && cp -r ./src/css ../resources/static/css && cp -r ./src/vendor ../resources/static/vendor",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
